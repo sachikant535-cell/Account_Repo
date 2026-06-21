@@ -13,7 +13,7 @@ USE SCHEMA APP_DB;
 ----------------------------------------------------
 CREATE OR REPLACE TABLE USERS (
     USER_ID STRING,
-    FULL_NAME STRING,
+    FULL_NAME STRING, ----- data 
     EMAIL STRING,
     ROLE STRING,
     SUBSCRIPTION_PLAN STRING,
