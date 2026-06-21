@@ -1,0 +1,143 @@
+-- DATABASE
+CREATE DATABASE IF NOT EXISTS SNOWFLAKE_AI_COPILOT;
+
+USE DATABASE SNOWFLAKE_AI_COPILOT;
+
+-- SCHEMA
+CREATE SCHEMA IF NOT EXISTS APP_DB;
+
+USE SCHEMA APP_DB;
+
+----------------------------------------------------
+-- USERS
+----------------------------------------------------
+CREATE OR REPLACE TABLE USERS (
+    USER_ID STRING,
+    FULL_NAME STRING,
+    EMAIL STRING,
+    ROLE STRING,
+    SUBSCRIPTION_PLAN STRING,
+    STATUS STRING,
+    CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
+    UPDATED_AT TIMESTAMP
+);
+
+----------------------------------------------------
+-- SUBSCRIPTIONS
+----------------------------------------------------
+CREATE OR REPLACE TABLE SUBSCRIPTIONS (
+    SUBSCRIPTION_ID STRING,
+    USER_ID STRING,
+    PLAN_NAME STRING,
+    PLAN_PRICE NUMBER(10,2),
+    START_DATE DATE,
+    END_DATE DATE,
+    STATUS STRING,
+    CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
+);
+
+----------------------------------------------------
+-- PAYMENTS
+----------------------------------------------------
+CREATE OR REPLACE TABLE PAYMENTS (
+    PAYMENT_ID STRING,
+    USER_ID STRING,
+    SUBSCRIPTION_ID STRING,
+    AMOUNT NUMBER(10,2),
+    PAYMENT_METHOD STRING,
+    PAYMENT_STATUS STRING,
+    TRANSACTION_ID STRING,
+    PAYMENT_DATE TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
+);
+
+----------------------------------------------------
+-- QUERY HISTORY
+----------------------------------------------------
+CREATE OR REPLACE TABLE QUERY_HISTORY (
+    QUERY_ID STRING,
+    USER_ID STRING,
+    PROMPT_TYPE STRING,
+    USER_PROMPT STRING,
+    AI_RESPONSE STRING,
+    CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
+);
+
+----------------------------------------------------
+-- PROMPT HISTORY
+----------------------------------------------------
+CREATE OR REPLACE TABLE PROMPT_HISTORY (
+    PROMPT_ID STRING,
+    USER_ID STRING,
+    MODULE_NAME STRING,
+    PROMPT_TEXT STRING,
+    RESPONSE_TEXT STRING,
+    CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
+);
+
+----------------------------------------------------
+-- INTERVIEW SESSIONS
+----------------------------------------------------
+CREATE OR REPLACE TABLE INTERVIEW_SESSIONS (
+    SESSION_ID STRING,
+    USER_ID STRING,
+    SESSION_TYPE STRING,
+    QUESTION STRING,
+    USER_ANSWER STRING,
+    AI_FEEDBACK STRING,
+    CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
+);
+
+----------------------------------------------------
+-- USAGE LOGS
+----------------------------------------------------
+CREATE OR REPLACE TABLE USAGE_LOGS (
+    LOG_ID STRING,
+    USER_ID STRING,
+    FEATURE_NAME STRING,
+    TOKENS_USED NUMBER,
+    REQUEST_TIME TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
+);
+
+----------------------------------------------------
+-- FEEDBACK
+----------------------------------------------------
+CREATE OR REPLACE TABLE FEEDBACK (
+    FEEDBACK_ID STRING,
+    USER_ID STRING,
+    RATING NUMBER,
+    COMMENTS STRING,
+    CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
+);
+
+----------------------------------------------------
+-- ADMIN USERS
+----------------------------------------------------
+CREATE OR REPLACE TABLE ADMIN_USERS (
+    ADMIN_ID STRING,
+    ADMIN_NAME STRING,
+    EMAIL STRING,
+    ROLE STRING,
+    CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
+);
+
+----------------------------------------------------
+-- API KEYS
+----------------------------------------------------
+CREATE OR REPLACE TABLE API_KEYS (
+    API_KEY_ID STRING,
+    USER_ID STRING,
+    API_KEY_NAME STRING,
+    STATUS STRING,
+    CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
+);
+
+----------------------------------------------------
+-- AUDIT LOGS
+----------------------------------------------------
+CREATE OR REPLACE TABLE AUDIT_LOGS (
+    AUDIT_ID STRING,
+    USER_ID STRING,
+    ACTION_TYPE STRING,
+    ACTION_DETAILS STRING,
+    CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
+);
